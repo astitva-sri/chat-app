@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="primaryAppBackground">#E3DDDD</color>
+    <color name="buttonColor">#19084A</color>
+    <color name="editTextBorderColor">#B6B7BA</color>
+    <color name="editTextBgColor">#E6EFFD</color>
+    <color name="colorAccent">#E91E63</color>
+    <color name="colorPrimaryBtnBg">#18206F</color>
+    <color name="colorPrimaryTextOpaque">#18206F</color>
+    <color name="PrimaryText">#18206F</color>
+</resources>

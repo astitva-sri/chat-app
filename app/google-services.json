@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "503806570927",
+    "project_id": "chat-things-up",
+    "storage_bucket": "chat-things-up.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:503806570927:android:ad042b9487fdb283a7bf5a",
+        "android_client_info": {
+          "package_name": "com.application.chatthingsup"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9GMtF01nUadfQF9pDbJ-VtptZ5gnJ5uw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
