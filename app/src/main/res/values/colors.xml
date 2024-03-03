@@ -10,4 +10,5 @@
     <color name="colorPrimaryBtnBg">#18206F</color>
     <color name="colorPrimaryTextOpaque">#18206F</color>
     <color name="PrimaryText">#18206F</color>
+    <color name="menuBg">#AFB0B3</color>
 </resources>

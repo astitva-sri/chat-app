@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -23,6 +24,8 @@ public class LoginActivity extends AppCompatActivity {
     EditText editTextEmail, editTextPassword;
     Button btnSignup, btnGetLogin;
     FirebaseAuth mAuth;
+    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    android.app.ProgressDialog progressDialog;
 
     @Override
     public void onStart() {
@@ -42,6 +45,9 @@ public class LoginActivity extends AppCompatActivity {
 
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
 
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Please wait...");
+        progressDialog.setCancelable(false);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -57,19 +63,30 @@ public class LoginActivity extends AppCompatActivity {
                 password = String.valueOf(editTextPassword.getText());
 
                 if (TextUtils.isEmpty(email)){
+                    progressDialog.dismiss();
                     Toast.makeText(LoginActivity.this, "Please enter email", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (TextUtils.isEmpty(password)){
+                    progressDialog.dismiss();
                     Toast.makeText(LoginActivity.this, "Please enter password", Toast.LENGTH_SHORT).show();
+                    return;
+                }if (password.length() < 6){
+                    progressDialog.dismiss();
+                    editTextPassword.setError("Enter more than 6 characters");
+                    Toast.makeText(LoginActivity.this, "Password must have more than 6 characters", Toast.LENGTH_SHORT).show();
+                    return;
+                }if (!email.matches(emailPattern)){
+                    progressDialog.dismiss();
+                    editTextEmail.setError("Type a valid email");
                     return;
                 }
 
-                mAuth.signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
+                                    progressDialog.show();
                                     Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                     startActivity(intent);
@@ -92,8 +109,9 @@ public class LoginActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent i = new Intent(LoginActivity.this, SignupActivity.class);
-                        startActivity(i);
+                        Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
+                        startActivity(intent);
+                        finish();
                     }
                 }
         );

@@ -11,7 +11,7 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -21,9 +21,10 @@
 
         <ImageView
             android:id="@+id/appIcon"
-            android:layout_width="@dimen/_140sdp"
-            android:layout_height="@dimen/_120sdp"
-            app:srcCompat="@drawable/app_icon" />
+            android:layout_width="@dimen/_120sdp"
+            android:layout_height="@dimen/_180sdp"
+            app:srcCompat="@drawable/app_icon"
+            android:layout_marginBottom="@dimen/_20sdp"/>
 
         <TextView
             android:id="@+id/appName"
@@ -38,6 +39,7 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/developerName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/designerName"
