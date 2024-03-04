@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class UserAdaptor extends RecyclerView.Adapter<UserAdaptor.viewholder> {
+public class UserAdaptor extends RecyclerView.Adapter<UserAdaptor.Viewholder> {
 
     MainActivity mainActivity;
     ArrayList<Users> usersArrayList;
@@ -25,13 +25,13 @@ public class UserAdaptor extends RecyclerView.Adapter<UserAdaptor.viewholder> {
 
     @NonNull
     @Override
-    public UserAdaptor.viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mainActivity).inflate(R.layout.activity_user_profile, parent, false);
-        return new viewholder(view);
+    public UserAdaptor.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(mainActivity).inflate(R.layout.user_item_view, parent, false);
+        return new Viewholder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull UserAdaptor.viewholder holder, int position) {
+    public void onBindViewHolder(@NonNull UserAdaptor.Viewholder holder, int position) {
 
         Users users = usersArrayList.get(position);
         holder.userName.setText(users.name);
@@ -44,10 +44,10 @@ public class UserAdaptor extends RecyclerView.Adapter<UserAdaptor.viewholder> {
         return usersArrayList.size();
     }
 
-    public class viewholder extends RecyclerView.ViewHolder {
+    public class Viewholder extends RecyclerView.ViewHolder {
         CircleImageView userProfileImage;
         TextView userName, userStatus;
-        public viewholder(@NonNull View itemView) {
+        public Viewholder(@NonNull View itemView) {
             super(itemView);
             userProfileImage = itemView.findViewById(R.id.userProfileImage);
             userName = itemView.findViewById(R.id.userName);
