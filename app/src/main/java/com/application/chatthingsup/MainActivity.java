@@ -11,7 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -30,65 +30,64 @@ public class MainActivity extends AppCompatActivity {
     UserAdaptor userAdaptor;
     FirebaseDatabase database;
     ArrayList<Users> usersArrayList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         btnSignOut = findViewById(R.id.btnSignOut);
-
         mainUserRecyclerView = findViewById(R.id.mainUserRecyclerView);
         mainUserRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mainUserRecyclerView.setAdapter(userAdaptor);
-
-        userAdaptor = new UserAdaptor(MainActivity.this, usersArrayList);
-
-        database = FirebaseDatabase.getInstance();
-
-        DatabaseReference reference = database.getReference().child("user");
 
         usersArrayList = new ArrayList<>();
+        userAdaptor = new UserAdaptor(MainActivity.this, usersArrayList);
+        mainUserRecyclerView.setAdapter(userAdaptor);
+
+        database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference().child("user");
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot: snapshot.getChildren())
-                {
+                usersArrayList.clear(); // Clear the previous data before adding new data
+                for (DataSnapshot dataSnapshot: snapshot.getChildren()) {
                     Users users = dataSnapshot.getValue(Users.class);
-                    usersArrayList.add(users);
+                    if (users != null) {
+                        usersArrayList.add(users);
+                    }
                 }
                 userAdaptor.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Toast.makeText(MainActivity.this, "Failed to fetch data: " + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
         auth = FirebaseAuth.getInstance();
-        if (auth.getCurrentUser() == null){
-            Intent intent =new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(intent);
+        if (auth.getCurrentUser() == null) {
+            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            finish(); // Finish the activity to prevent user from coming back if not authenticated
         }
 
         btnSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Show a dialog for sign out confirmation
                 Dialog dialog = new Dialog(MainActivity.this, R.style.Dialog);
                 dialog.setContentView(R.layout.dialog_layout);
 
-                Button no, yes;
-
-                yes = dialog.findViewById(R.id.btnYesLogout);
-                no = dialog.findViewById(R.id.btnNoLogout);
+                Button yes = dialog.findViewById(R.id.btnYesLogout);
+                Button no = dialog.findViewById(R.id.btnNoLogout);
 
                 yes.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         FirebaseAuth.getInstance().signOut();
-                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                        startActivity(intent);
+                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                        finish(); // Finish the activity after sign out
                     }
                 });
 
@@ -98,11 +97,9 @@ public class MainActivity extends AppCompatActivity {
                         dialog.dismiss();
                     }
                 });
+
                 dialog.show();
             }
         });
-
-
-
     }
 }

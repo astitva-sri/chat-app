@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginTop="@dimen/_10sdp">
+    android:layout_height="@dimen/_66sdp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,8 +11,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/userProfileImage"
-            android:layout_width="@dimen/_48sdp"
-            android:layout_height="@dimen/_48sdp"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
             android:layout_marginStart="@dimen/_12sdp"
             android:layout_marginTop="@dimen/_12sdp"
             android:layout_marginBottom="@dimen/_12sdp"
@@ -25,6 +24,7 @@
             android:orientation="vertical"
             android:layout_gravity="center"
             android:paddingStart="12dp"
+            android:paddingEnd="12dp"
             android:layout_marginStart="8dp">
             <TextView
                 android:id="@+id/userName"
@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:text="Name"
-                android:textSize="22dp"
+                android:textSize="22sp"
                 style="@style/TextAppearance.AppCompat.Subhead"
                 android:textStyle="bold"/>
             <TextView
@@ -41,12 +41,11 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:text="Status"
-                android:textSize="14dp"
+                android:textSize="14sp"
                 android:fontFamily="@font/poppins_regular"/>
 
         </LinearLayout>
 
     </LinearLayout>
-
 
 </RelativeLayout>

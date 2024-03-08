@@ -11,4 +11,5 @@
     <color name="colorPrimaryTextOpaque">#18206F</color>
     <color name="PrimaryText">#18206F</color>
     <color name="menuBg">#AFB0B3</color>
+    <color name="chatWinBg">#9D90EC</color>
 </resources>

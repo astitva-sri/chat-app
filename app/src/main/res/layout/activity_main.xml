@@ -53,27 +53,16 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/contentDivider"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        android:layout_marginTop="@dimen/_8sdp"/>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mainUserRecyclerView"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/_350sdp"
+        android:layout_width="380dp"
+        android:layout_height="@dimen/_390sdp"
         android:layout_marginStart="@dimen/_22sdp"
-        android:layout_marginTop="@dimen/_28sdp"
         android:layout_marginEnd="@dimen/_22sdp"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/contentDivider" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
