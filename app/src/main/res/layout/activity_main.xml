@@ -59,6 +59,8 @@
         android:layout_height="@dimen/_390sdp"
         android:layout_marginStart="@dimen/_22sdp"
         android:layout_marginEnd="@dimen/_22sdp"
+        android:layout_marginTop="@dimen/_18sdp"
+        android:layout_marginBottom="@dimen/_18sdp"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
