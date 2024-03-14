@@ -30,22 +30,22 @@ public class MessagesAdaptor extends RecyclerView.Adapter {
 
     public MessagesAdaptor(Context context, ArrayList<MessageModelClass> messageAdaptorArrayList) {
         this.context = context;
-        this.messageAdaptorArrayList = messageAdaptorArrayList != null ? messageAdaptorArrayList : new ArrayList<>();
+        this.messageAdaptorArrayList = messageAdaptorArrayList;   /*!= null ? messageAdaptorArrayList : new ArrayList<>();*/
     }
 
-    class senderViewHolder extends RecyclerView.ViewHolder {
-
+    //Declaring View holder for sender profile
+    static class senderViewHolder extends RecyclerView.ViewHolder {
         CircleImageView profileImage;
         TextView msgText;
         public senderViewHolder(@NonNull View itemView) {
             super(itemView);
-
             profileImage = itemView.findViewById(R.id.senderProfileImage);
             msgText = itemView.findViewById(R.id.msgSenderText);
         }
     }
 
-    class receiverViewHolder extends RecyclerView.ViewHolder {
+    //Declaring View holder for receiver profile
+    static class receiverViewHolder extends RecyclerView.ViewHolder {
         CircleImageView profileImage;
         TextView msgText;
         public receiverViewHolder(@NonNull View itemView) {

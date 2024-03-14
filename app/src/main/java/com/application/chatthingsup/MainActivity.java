@@ -24,82 +24,123 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    ImageView btnSignOut;
+    // UI components
+    ImageView btnSignOut, btnSettings, btnVideoCall;
+
+    // Firebase
     FirebaseAuth auth;
-    RecyclerView mainUserRecyclerView;
-    UserAdaptor userAdaptor;
     FirebaseDatabase database;
-    ArrayList<Users> usersArrayList;
+    DatabaseReference usersReference;
+
+    // RecyclerView for displaying users
+    RecyclerView mainUserRecyclerView;
+    UserAdaptor userAdapter;
+    ArrayList<Users> userList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Initialize UI components
         btnSignOut = findViewById(R.id.btnSignOut);
+        btnSettings = findViewById(R.id.btnSettings);
+        btnVideoCall = findViewById(R.id.btnVideoCall);
+
+        // Initialize Firebase
+        auth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+        usersReference = database.getReference().child("users");
+
+        // Initialize RecyclerView for displaying users
+        userList = new ArrayList<>();
         mainUserRecyclerView = findViewById(R.id.mainUserRecyclerView);
         mainUserRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        userAdapter = new UserAdaptor(MainActivity.this, userList);
+        mainUserRecyclerView.setAdapter(userAdapter);
 
-        usersArrayList = new ArrayList<>();
-        userAdaptor = new UserAdaptor(MainActivity.this, usersArrayList);
-        mainUserRecyclerView.setAdapter(userAdaptor);
-
-        database = FirebaseDatabase.getInstance();
-        DatabaseReference reference = database.getReference().child("user");
-
-        reference.addValueEventListener(new ValueEventListener() {
+        usersReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                usersArrayList.clear(); // Clear the previous data before adding new data
                 for (DataSnapshot dataSnapshot: snapshot.getChildren()) {
                     Users users = dataSnapshot.getValue(Users.class);
-                    if (users != null) {
-                        usersArrayList.add(users);
-                    }
+                    userList.add(users);
                 }
-                userAdaptor.notifyDataSetChanged();
+                userAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(MainActivity.this, "Failed to fetch data: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+
             }
         });
 
-        auth = FirebaseAuth.getInstance();
-        if (auth.getCurrentUser() == null) {
-            startActivity(new Intent(MainActivity.this, LoginActivity.class));
-            finish(); // Finish the activity to prevent user from coming back if not authenticated
-        }
-
+        //Sign-out button on click listener
         btnSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Show a dialog for sign out confirmation
-                Dialog dialog = new Dialog(MainActivity.this, R.style.Dialog);
-                dialog.setContentView(R.layout.dialog_layout);
-
-                Button yes = dialog.findViewById(R.id.btnYesLogout);
-                Button no = dialog.findViewById(R.id.btnNoLogout);
-
-                yes.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        FirebaseAuth.getInstance().signOut();
-                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                        finish(); // Finish the activity after sign out
-                    }
-                });
-
-                no.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
-
-                dialog.show();
+                showSignOutDialog();
             }
         });
+
+        // Set onClickListener for settings button
+        btnSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openSettingsActivity();
+            }
+        });
+
+        // Set onClickListener for VideoCall button
+        btnVideoCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openVideoCallActivity();
+            }
+        });
+
+        if (auth.getCurrentUser() == null){
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+        }
+    }
+
+    // Show sign out confirmation dialog
+    private void showSignOutDialog() {
+        Dialog dialog = new Dialog(MainActivity.this, R.style.Dialog);
+        dialog.setContentView(R.layout.dialog_layout);
+
+        Button yes = dialog.findViewById(R.id.btnYesLogout);
+        Button no = dialog.findViewById(R.id.btnNoLogout);
+
+        yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                finish(); // Finish the activity after sign out
+            }
+        });
+
+        no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+    }
+
+    // Open SettingsActivity
+    private void openSettingsActivity() {
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
+    }
+
+    // Open VideoCallActivity
+    private void openVideoCallActivity(){
+        Intent intent = new Intent(this, VideoCallActivity.class);
+        startActivity(intent);
     }
 }

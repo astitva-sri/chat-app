@@ -33,6 +33,7 @@
                 android:orientation="vertical"
                 android:layout_gravity="center"
                 android:paddingStart="12dp"
+                android:paddingEnd="12dp"
                 android:layout_marginStart="8dp">
                 <TextView
                     android:id="@+id/receiverName"
@@ -40,7 +41,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:text="Name"
-                    android:textSize="30dp"
+                    android:textSize="30sp"
                     style="@style/TextAppearance.AppCompat.Subhead"
                     android:textStyle="bold"/>
                 <TextView
@@ -111,10 +112,10 @@
             android:layout_weight="1">
 
             <ImageView
-                android:layout_width="35dp"
-                android:layout_height="32dp"
+                android:layout_width="30dp"
+                android:layout_height="31dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_send_message"/>
+                android:src="@drawable/ic_send_message" />
 
         </androidx.cardview.widget.CardView>
 

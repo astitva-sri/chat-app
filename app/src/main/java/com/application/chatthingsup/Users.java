@@ -4,6 +4,9 @@ package com.application.chatthingsup;
 public class Users {
     String profilePic, email, name, password, userId, lastMessage, status;
 
+    public Users() {
+    }
+
     public Users(String id, String name, String email, String password, String profilePic, String status){
         this.userId = id;
         this.name = name;
@@ -12,9 +15,6 @@ public class Users {
         this.profilePic = profilePic;
         this.status = status;
 
-    }
-
-    public Users() {
     }
 
     public String getProfilePic() {
