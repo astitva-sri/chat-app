@@ -48,9 +48,10 @@ public class MainActivity extends AppCompatActivity {
         btnVideoCall = findViewById(R.id.btnVideoCall);
 
         // Initialize Firebase
-        auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
-        usersReference = database.getReference().child("users");
+        auth = FirebaseAuth.getInstance();
+
+        DatabaseReference reference = database.getReference().child("user");
 
         // Initialize RecyclerView for displaying users
         userList = new ArrayList<>();
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         userAdapter = new UserAdaptor(MainActivity.this, userList);
         mainUserRecyclerView.setAdapter(userAdapter);
 
-        usersReference.addValueEventListener(new ValueEventListener() {
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot: snapshot.getChildren()) {

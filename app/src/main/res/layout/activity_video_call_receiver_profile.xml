@@ -5,8 +5,9 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".VideoCallActivity"
-    android:background="@color/primaryAppBackground">
+    tools:context=".VideoCallReceiverProfile"
+    android:background="@color/primaryAppBackground"
+    >
 
     <ImageView
         android:id="@+id/videoIcon"
@@ -33,7 +34,7 @@
 
     <LinearLayout
         android:layout_width="@dimen/_280sdp"
-        android:layout_height="@dimen/_140sdp"
+        android:layout_height="@dimen/_180sdp"
         android:background="@drawable/border_shape"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,39 +45,52 @@
         android:layout_marginStart="@dimen/_24sdp"
         android:layout_marginEnd="@dimen/_24sdp">
 
-
+        <TextView
+            android:id="@+id/hostId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_marginBottom="@dimen/_12sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:textSize="@dimen/_16sdp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_gravity="center"/>
 
         <EditText
-            android:id="@+id/inputHostId"
+            android:id="@+id/inputReceiverId"
             android:layout_width="@dimen/_264sdp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_12sdp"
+            android:textSize="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_12sdp"
             android:inputType="textEmailAddress"
-            android:hint="Input Your Email..."
+            android:hint="Input Email, you wish to connect"
             />
 
-        <Button
-            android:id="@+id/btnLoginToNext"
-            style="@style/Widget.Material3.Button.OutlinedButton.Icon"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_44sdp"
-            android:layout_marginTop="@dimen/_14sdp"
-            android:text="Login and add receiver Id"
-            app:icon="@drawable/video_call" />
+        <com.zegocloud.uikit.prebuilt.call.invite.widget.ZegoSendCallInvitationButton
+            android:id="@+id/btnConnectVC"
+            android:layout_width="93dp"
+            android:layout_height="54dp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_marginBottom="@dimen/_12sdp"
+            android:background="@color/white"/>
 
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/backHomeBtn"
+        android:id="@+id/backBtn"
         android:layout_width="@dimen/_35sdp"
         android:layout_height="@dimen/_35sdp"
-        android:src="@drawable/ic_home"
+        android:src="@drawable/ic_back_track"
         android:layout_gravity="center_horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="@dimen/_32sdp"
         />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -33,6 +34,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SettingsActivity extends AppCompatActivity {
 
+    ImageView backBtn;
     CircleImageView setProfile;
     EditText setName, setStatus;
     Button setButton;
@@ -56,6 +58,7 @@ public class SettingsActivity extends AppCompatActivity {
         setName = findViewById(R.id.settingUsername);
         setStatus = findViewById(R.id.settingStatus);
         setButton =findViewById(R.id.btnChange);
+        backBtn = findViewById(R.id.backBtn);
 
         DatabaseReference reference = database.getReference().child("user").child(auth.getUid());
         StorageReference storageReference = storage.getReference().child("upload").child(auth.getUid());
@@ -182,6 +185,14 @@ public class SettingsActivity extends AppCompatActivity {
                         }
                     });
                 }
+            }
+        });
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SettingsActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
     }

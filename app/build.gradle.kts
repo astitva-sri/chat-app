@@ -36,6 +36,7 @@ android {
 
 dependencies {
 
+    implementation ("com.github.ZEGOCLOUD:zego_uikit_prebuilt_call_android:2.11.4")
     implementation ("com.squareup.picasso:picasso:2.8")
     implementation ("de.hdodenhof:circleimageview:3.1.0")
     implementation ("com.intuit.sdp:sdp-android:1.1.0")

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -36,6 +37,9 @@ public class UserAdaptor extends RecyclerView.Adapter<UserAdaptor.Viewholder> {
     public void onBindViewHolder(@NonNull UserAdaptor.Viewholder holder, int position) {
 
         Users users = usersArrayList.get(position);
+        if (FirebaseAuth.getInstance().getCurrentUser().getUid().equals(users.getUserId())){
+            holder.itemView.setVisibility(View.GONE);
+        }
         holder.userName.setText(users.name);
         holder.userStatus.setText(users.status);
         Picasso.get().load(users.profilePic).into(holder.userProfileImage);

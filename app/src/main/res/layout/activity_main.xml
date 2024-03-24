@@ -60,6 +60,7 @@
             android:id="@+id/mainUserRecyclerView"
             android:layout_width="380dp"
             android:layout_height="@dimen/_390sdp"
+            android:layout_margin="@dimen/_24sdp"
             android:layout_marginStart="@dimen/_22sdp"
             android:layout_marginEnd="@dimen/_22sdp"
             android:layout_marginTop="@dimen/_18sdp"
